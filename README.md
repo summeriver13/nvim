@@ -72,7 +72,7 @@ require("kits.file-search")         -- file search 文件搜索
 
 ## core
 
-manager nvim basic setting.
+manage nvim basic setting.
 
 ### options.lua
 
@@ -147,7 +147,7 @@ keymap.set("n", "<C-H>", ":bprevious<CR>")
 
 ## kits
 
-manager nvim plugins usage.
+manage nvim plugins usage.
 
 ```bash
 .
