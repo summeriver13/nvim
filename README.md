@@ -177,7 +177,7 @@ Please make sure that line is setting correct when you change theme.
 
 ## plugins
 
-manager nvim plugins install.
+manage nvim plugins install.
 
 - bufferline.lua
     - [akinsho/bufferlin.nvim](https://github.com/akinsho/bufferline.nvim)
