@@ -32,7 +32,7 @@ Open any file with nvim.
 Than waitting for plugin manager download plugins.
 
 ```bash
-nvim nvim/init.nvim
+nvim nvim/init.lua
 ```
 
 Finshed.
