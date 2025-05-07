@@ -10,7 +10,7 @@ Windows11, WSL2, Debain.
 
 **Please make sure that your network environment is normal,especially that you can access Github.**
 
-- neovim. (Version: >=0.8) ([lazy.nvim]())
+- neovim. (Version: >=0.8) ([lazy.nvim](https://github.com/LazyVim/LazyVim))
 - git
 - wget or curl, unzip, tar or gtar,gzip. ([mason.nvim](https://github.com/williamboman/mason.nvim?tab=readme-ov-file#requirements))
 
