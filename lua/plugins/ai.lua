@@ -13,10 +13,44 @@ return {
   -- Avante.nvim - 核心AI交互侧边栏
   {
     "yetone/avante.nvim",
-    branch = "main",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- 设置为 false 以使用最新开发版
+    opts = {
+      -- 基础配置
+      provider = "openai",
+      auto_suggestions_provider = "openai",
+    },
+    build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false", -- Windows 下的构建命令
     dependencies = {
+      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      --- 下面是可选依赖
+      "nvim-tree/nvim-web-devicons", -- 图标支持
+      {
+        -- 支持图像粘贴
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- 渲染增强
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
     },
     config = function()
       require("kits.ai.avante")

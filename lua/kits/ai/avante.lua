@@ -12,57 +12,98 @@ local avante = require("avante")
 -- Vibe Coding 提升：配置类Cursor的沉浸式侧边栏，让AI对话成为编码流程的自然延伸
 -- 配置Avante.nvim作为AI交互核心
 avante.setup({
-  -- 侧边栏配置：类似Cursor的聊天界面
-  sidebar = {
-    position = "right",
-    width = 50,
-    -- 沉浸式暗色主题
-    theme = "dark",
-  },
+  --- @alias Provider "openai" | "claude" | "azure" | "gemini" | "cohere" | "replicate" | "together" | "mistral" | "ollama"
+  provider = "openai", -- 你可以根据需要修改为 gemini, claude 等
+  auto_suggestions_provider = "openai",
   
-  -- AI提供商配置：支持多模型切换
   providers = {
     openai = {
-      api_key = os.getenv("OPENAI_API_KEY") or "",
-      model = "gpt-4",
-    },
-    anthropic = {
-      api_key = os.getenv("ANTHROPIC_API_KEY") or "",
-      model = "claude-3-opus",
+      endpoint = "https://api.openai.com/v1",
+      model = "gpt-4o", -- 推荐使用最新模型
+      timeout = 30000, -- 超时时间
+      max_tokens = 4096,
     },
   },
-  
-  -- 代码理解增强：深度分析代码上下文
-  code_understanding = {
+
+  -- 侧边栏配置：类似Cursor的聊天界面
+  sidebar_header = {
     enabled = true,
-    max_context_lines = 100,
-    include_comments = true,
-    detect_language = true,
+    align = "center",
+    rounded = true,
   },
   
-  -- 交互模式配置
-  modes = {
-    -- 架构讨论模式：用于代码重构和设计
-    architecture = {
-      prompt = "你是一个资深架构师，请分析这段代码并提出改进建议:",
-      temperature = 0.7,
-    },
-    -- 代码补全模式：流式生成代码
-    completion = {
-      prompt = "请补全以下代码，保持风格一致:",
-      temperature = 0.3,
-    },
-    -- 错误调试模式：分析日志和错误
-    debug = {
-      prompt = "请分析以下错误日志并提供解决方案:",
-      temperature = 0.5,
-    },
+  -- 侧边栏宽度
+  width = 40,
+  
+  -- 交互行为
+  behaviour = {
+    auto_suggestions = false, -- 如果需要自动建议可以开启
+    auto_set_highlight_group = true,
+    auto_set_keymaps = true,
+    auto_apply_diff_after_generation = false,
+    support_paste_from_clipboard = true,
   },
   
-  -- 快捷键提示：在侧边栏显示可用操作
-  keymaps = {
-    show_help = true,
-    position = "bottom",
+  -- 快捷键映射 (类 Cursor)
+  mappings = {
+    --- @class AvanteConflictMappings
+    diff = {
+      ours = "co",
+      theirs = "ct",
+      all_theirs = "ca",
+      both = "cb",
+      cursor = "cc",
+      next = "]x",
+      prev = "[x",
+    },
+    suggestion = {
+      accept = "<M-l>",
+      next = "<M-]>",
+      prev = "<M-[>",
+      dismiss = "<C-]>",
+    },
+    jump = {
+      next = "]]",
+      prev = "[[",
+    },
+    submit = {
+      insert = "<cr>",
+      normal = "<cr>",
+    },
+    sidebar = {
+      apply_all = "A",
+      apply_cursor = "a",
+      switch_windows = "<Tab>",
+      reverse_switch_windows = "<S-Tab>",
+    },
+  },
+
+  -- UI 渲染配置
+  hints = { enabled = true },
+  windows = {
+    --- @type "right" | "left" | "top" | "bottom"
+    position = "right", -- 像 Trae/Cursor 一样放在右侧
+    wrap = true,
+    width = 30,
+    sidebar_header = {
+      enabled = true,
+      align = "center",
+      rounded = true,
+    },
+    input = {
+      prefix = "> ",
+      height = 8, -- 输入框高度
+    },
+    edit = {
+      border = "rounded",
+      start_insert = true, -- 打开时自动进入插入模式
+    },
+    ask = {
+      floating = false, -- 使用侧边栏而不是浮窗
+      start_insert = true,
+      border = "rounded",
+      focus_on_apply = "ours",
+    },
   },
 })
 
