@@ -96,7 +96,7 @@ avante.setup({
       rounded = true,
     },
     input = {
-      prefix = "💬 ", -- 更改为更亲切的对话图标
+      prefix = "> ", -- 恢复为单字符宽度，避免 Windows 下的 E239 错误
       height = 8,
     },
     edit = {
