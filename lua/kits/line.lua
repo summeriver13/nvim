@@ -57,6 +57,19 @@ require('lualine').setup {
         end
       }
     },
+    lualine_b = {
+      {
+        function()
+          local leader = vim.g.mapleader
+          if leader == " " then
+            return "Leader: 空格"
+          else
+            return "Leader: " .. leader
+          end
+        end,
+        color = { fg = "#bb9af7", gui = "bold" }, -- 使用 tokyonight 的紫色
+      }
+    },
     lualine_x = {
       {
         avante_usage,
