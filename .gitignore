@@ -54,6 +54,12 @@ test-results/
 *.test
 *.spec
 
+# 测试生成的临时文件
+test-load.lua
+test-func.lua
+test-ai-functionality.lua
+test-*.lua
+
 # 环境变量文件
 .env
 .env.local
