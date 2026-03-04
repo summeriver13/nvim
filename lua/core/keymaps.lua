@@ -18,6 +18,8 @@ local keymap = vim.keymap
 
 -- [插入模式] --
 keymap.set("i", "jk", "<ESC>")
+-- Vibe Coding 提升：支持系统级 Ctrl+V 粘贴，解决 Windows 用户在输入框粘贴难的问题
+keymap.set("i", "<C-v>", '<C-r>+', { desc = "从系统剪贴板粘贴" })
 
 -- [视觉模式] --
 -- 单行或多行移动
@@ -28,6 +30,10 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- 窗口
 keymap.set("n", "<leader>sv", "<C-w>v") -- 水平新增窗口
 keymap.set("n", "<leader>sh", "<C-w>h") -- 垂直新增窗口
+
+-- [命令行模式] --
+-- 支持 Ctrl+V 粘贴
+keymap.set("c", "<C-v>", "<C-r>+", { desc = "命令行粘贴" })
 
 -- 取消高亮
 keymap.set("n", "<leader>nh", ":nohl<CR>")

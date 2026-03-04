@@ -19,6 +19,22 @@ opt.cursorline = true
 -- 系统剪贴板
 opt.clipboard:append("unnamedplus")
 
+-- Vibe Coding 提升：显式配置 Windows 剪贴板，解决粘贴失效的问题
+if vim.fn.has("win32") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank-vibe",
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+    cache_enabled = 0,
+  }
+end
+
 -- 默认新窗口右和下
 opt.splitright = true
 opt.splitbelow = true
