@@ -23,7 +23,9 @@ avante.setup({
       api_key_name = "DEEPSEEK_API_KEY", -- 环境变量名
       timeout = 30000,
       max_tokens = 4096,
-      temperature = 0,
+      extra_request_body = {
+        temperature = 0,
+      },
     },
   },
 
@@ -34,6 +36,7 @@ avante.setup({
     auto_set_keymaps = true,
     auto_apply_diff_after_generation = false,
     support_paste_from_clipboard = true,
+    enable_token_counting = false, -- 暂时禁用本地 Token 计算以修复 Windows 下的编码器崩溃问题
   },
   
   -- 快捷键映射 (类 Cursor)
