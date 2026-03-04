@@ -60,6 +60,10 @@ opt.selectmode = ""
 opt.updatetime = 300
 opt.timeoutlen = 400
 
+-- Vibe Coding 提升：全局状态栏 (Global Statusline)
+-- 将所有窗口的状态栏合并为底部唯一的全局状态栏，类似于 VSCode/Trae
+opt.laststatus = 3
+
 -- Vibe Coding 提升：全面汉化界面 (系统语言与菜单)
 -- 设置语言为中文 (zh_CN)
 vim.api.nvim_command("language zh_CN.UTF-8")

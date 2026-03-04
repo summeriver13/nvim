@@ -32,6 +32,7 @@ require('lualine').setup {
     icons_enabled = true,
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
+    globalstatus = true, -- 确保 lualine 启用全局状态栏模式
   },
   sections = {
     lualine_a = {
