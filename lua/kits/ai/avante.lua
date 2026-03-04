@@ -110,7 +110,7 @@ avante.setup({
     },
     ask = {
       floating = false,
-      start_insert = true,
+      start_insert = true, -- 关键修复：确保启动时进入插入模式
       border = "rounded",
       focus_on_apply = "ours",
     },
