@@ -22,6 +22,11 @@ require("toggleterm").setup({
   close_on_exit = true,
   shell = vim.o.shell,
   auto_scroll = true,
+  -- Vibe Coding 提升：配置终端开启时确保不占据文件树的空间
+  -- 使用 wincmd j 确保它作为当前窗口（代码区）的下部分割，而不是全局底部
+  on_open = function(term)
+    vim.cmd("wincmd j")
+  end,
   -- 样式设置
   highlights = {
     Normal = { link = "Normal" },

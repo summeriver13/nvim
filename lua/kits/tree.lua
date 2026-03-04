@@ -45,6 +45,17 @@ if status_nt then
       -- Vibe Coding 提升：配置鼠标单击打开文件
       -- 鼠标左键单击：打开文件或展开目录
       vim.keymap.set('n', '<LeftRelease>', api.node.open.edit, opts('Open'))
+      
+      -- Vibe Coding 提升：强制将文件树移动到最左侧并占据全高 (topleft)
+      -- 这样下方的终端就只会出现在代码区域下方，而不会挤压文件树
+      vim.schedule(function()
+        local winid = vim.fn.bufwinid(bufnr)
+        if winid ~= -1 then
+          vim.api.nvim_win_call(winid, function()
+            vim.cmd("wincmd H")
+          end)
+        end
+      end)
     end,
     sort = {
       sorter = "case_sensitive",
