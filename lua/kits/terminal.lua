@@ -57,4 +57,22 @@ function M.toggle()
   vim.cmd("ToggleTerm")
 end
 
+-- Vibe Coding 提升：启动时自动开启底部终端，复刻 IDE 完整布局
+function M.setup()
+  vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+      -- 延迟执行以确保主窗口布局已稳定
+      vim.defer_fn(function()
+        -- 仅在没有通过 nvim 打开特定文件（即空启动）或者正常启动时开启
+        -- 避免在进行 git commit 等临时操作时弹出终端
+        if vim.bo.buftype == "" then
+          vim.cmd("ToggleTerm")
+          -- 开启后将焦点跳回到上方编辑区，保持“编辑器优先”
+          vim.cmd("wincmd k")
+        end
+      end, 300)
+    end,
+  })
+end
+
 return M
