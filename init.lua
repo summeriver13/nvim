@@ -22,4 +22,6 @@ require("kits.autopair") -- autopair 括号匹配
 
 require("kits.file-search") -- file search 文件搜索
 require("kits.terminal").setup() -- terminal 底部终端 (并启用自动开启)
+require("kits.ui.layout").setup() -- UI 布局重置功能
 
+-- ## end

@@ -39,7 +39,8 @@ avante.setup({
     support_paste_from_clipboard = true,
     enable_token_counting = false, -- 强制禁用本地 Token 计算以修复 Windows 下的编码器崩溃问题
     auto_focus_sidebar = true,
-    -- 禁用基于 shell 的上下文提取以防止 Windows 乱码导致的 API 崩溃
+    -- Vibe Coding 提升：根据系统环境决定是否支持 bash 命令
+    -- 在 Windows 下，我们通过自定义的 route_command 处理
     support_bash_commands = not env.is_windows(),
   },
 
