@@ -12,7 +12,7 @@ return {
   -- Vibe Coding 提升：Avante作为核心AI交互层，提供类Cursor的沉浸式侧边栏体验
   -- Avante.nvim - 核心AI交互侧边栏
   {
-    "avante-ai/avante.nvim",
+    "yetone/avante.nvim",
     branch = "main",
     dependencies = {
       "nvim-lua/plenary.nvim",
