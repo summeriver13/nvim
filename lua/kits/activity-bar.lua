@@ -28,11 +28,17 @@ local function create_activity_bar()
       winhighlight = "Normal:Normal,FloatBorder:Normal",
       fillchars = "eob: ",
       cursorline = false,
+      winfixwidth = true, -- 锁定宽度，防止被挤压
     },
   })
 
   -- 挂载 split
   split:mount()
+
+  -- Vibe Coding 提升：强制将该窗口移动到最左侧 (topleft)
+  vim.api.nvim_win_call(split.winid, function()
+    vim.cmd("wincmd H")
+  end)
 
   -- 设置缓冲区内容
   local lines = {}
@@ -71,6 +77,24 @@ local function create_activity_bar()
   split:on(event.BufDelete, function()
     M.instance = nil
   end)
+
+  -- Vibe Coding 提升：监听窗口变化，确保活动栏始终在最左边
+  -- 使用 schedule 延迟执行，避免在窗口关闭过程中尝试移动窗口（修复 E242 错误）
+  vim.api.nvim_create_autocmd({ "WinEnter", "WinNew" }, {
+    callback = function()
+      vim.schedule(function()
+        if M.instance and vim.api.nvim_win_is_valid(M.instance.winid) then
+          -- 检查是否已经在最左侧，避免不必要的移动
+          local win_col = vim.api.nvim_win_get_position(M.instance.winid)[2]
+          if win_col > 0 then
+            vim.api.nvim_win_call(M.instance.winid, function()
+              vim.cmd("wincmd H")
+            end)
+          end
+        end
+      end)
+    end
+  })
 
   return split
 end
