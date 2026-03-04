@@ -67,6 +67,37 @@ if status_nt then
       dotfiles = true,
     },
   })
+
+  -- Vibe Coding 提升：Neovim 启动时自动打开 nvim-tree，实现类似 Trae 的布局
+  local function open_nvim_tree(data)
+    -- 仅当启动时没有指定目录，或者是打开一个目录时才自动打开 tree
+    local directory = vim.fn.isdirectory(data.file) == 1
+
+    if not directory then
+      return
+    end
+
+    -- 切换到目录
+    vim.cmd.cd(data.file)
+
+    -- 打开 tree
+    require("nvim-tree.api").tree.open()
+  end
+
+  -- 创建自动命令：启动时打开
+  vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
+  -- 另一个自动命令：即使打开文件也确保 tree 是打开的
+  vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    callback = function(data)
+      local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
+      local is_file = vim.fn.filereadable(data.file) == 1
+
+      if no_name or is_file then
+        require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
+      end
+    end
+  })
 end
 
 -- ## nvim-treesitter.nvim
