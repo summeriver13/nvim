@@ -34,6 +34,28 @@ require('lualine').setup {
     section_separators = { left = '', right = ''},
   },
   sections = {
+    lualine_a = {
+      {
+        'mode',
+        fmt = function(str)
+          -- Vibe Coding 提升：汉化模式显示
+          local mode_map = {
+            ['NORMAL'] = '普通',
+            ['INSERT'] = '插入',
+            ['VISUAL'] = '视觉',
+            ['V-LINE'] = '视线',
+            ['V-BLOCK'] = '视块',
+            ['SELECT'] = '选择',
+            ['S-LINE'] = '选线',
+            ['S-BLOCK'] = '选块',
+            ['REPLACE'] = '替换',
+            ['COMMAND'] = '命令',
+            ['TERMINAL'] = '终端',
+          }
+          return mode_map[str] or str
+        end
+      }
+    },
     lualine_x = {
       {
         avante_usage,

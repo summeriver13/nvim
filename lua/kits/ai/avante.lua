@@ -100,6 +100,22 @@ avante.setup({
     },
   },
   
+  -- Vibe Coding 提升：汉化 Avante AI 界面
+  ---@class avante.Config.hints
+  hints = {
+    enabled = true,
+  },
+  ---@class avante.Config.mappings.sidebar
+  mappings = {
+    sidebar = {
+      apply_all = "A",
+      apply_cursor = "a",
+      switch_windows = "<Tab>",
+      reverse_switch_windows = "<S-Tab>",
+      -- 增加中文说明（如果支持自定义映射描述）
+    },
+  },
+  
   -- 强制使用 snacks 或 native 以避免 dressing.nvim 的列表错误
   selector = {
     provider = "snacks",

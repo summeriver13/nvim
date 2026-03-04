@@ -56,6 +56,16 @@ opt.mousescroll = "ver:3,hor:2"
 opt.mousemodel = "popup"
 -- 4. 禁用选择模式，确保鼠标拖拽进入 Visual Mode 而不是 Select Mode
 opt.selectmode = ""
--- 5. 延迟时间（影响 WhichKey 和鼠标菜单弹出速度）
+-- 延迟时间（影响 WhichKey 和鼠标菜单弹出速度）
 opt.updatetime = 300
 opt.timeoutlen = 400
+
+-- Vibe Coding 提升：全面汉化界面 (系统语言与菜单)
+-- 设置语言为中文 (zh_CN)
+vim.api.nvim_command("language zh_CN.UTF-8")
+-- 设置消息显示为中文
+vim.api.nvim_command("language message zh_CN.UTF-8")
+-- 菜单汉化 (如果支持)
+opt.langmenu = "zh_CN.UTF-8"
+-- 拼写检查建议使用中文 (可选)
+opt.spelllang = { "en_us", "cjk" }

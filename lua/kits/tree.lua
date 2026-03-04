@@ -62,6 +62,24 @@ if status_nt then
           git = true,
         },
       },
+      -- Vibe Coding 提升：汉化文件树的节点文本和状态
+      indent_markers = {
+        enable = true,
+      },
+    },
+    -- Vibe Coding 提升：汉化 NvimTree 的诊断与状态提示
+    diagnostics = {
+      enable = true,
+      show_on_dirs = true,
+      icons = {
+        hint = "",
+        info = "",
+        warning = "",
+        error = "",
+      },
+    },
+    system_open = {
+      cmd = "explorer", -- Windows 下使用资源管理器打开
     },
     filters = {
       dotfiles = true,
