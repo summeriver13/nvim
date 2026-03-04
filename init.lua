@@ -13,7 +13,6 @@ require("kits.theme.tokyonight") -- theme 主题
 require("kits.line") -- line 状态栏
 require("kits.buffer") -- buffer 标签栏
 require("kits.tree") -- tree 文件树
-require("kits.activity-bar").setup() -- activity bar 活动侧边栏
 
 require("kits.lsp") -- lsp 语言服务协议
 require("kits.ai") -- ai AI编程体验增强
