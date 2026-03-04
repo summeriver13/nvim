@@ -9,8 +9,6 @@ Vibe Coding 提升点：
 
 local avante = require("avante")
 
-print("🔍 正在初始化 Avante AI...")
-
 -- Vibe Coding 提升：配置类Cursor的沉浸式侧边栏，让AI对话成为编码流程的自然延伸
 -- 配置Avante.nvim作为AI交互核心
 avante.setup({
@@ -39,6 +37,7 @@ avante.setup({
     auto_apply_diff_after_generation = false,
     support_paste_from_clipboard = true,
     enable_token_counting = false, -- 强制禁用本地 Token 计算以修复 Windows 下的编码器崩溃问题
+    auto_focus_sidebar = true,
   },
   
   -- 快捷键映射 (类 Cursor)
@@ -110,12 +109,8 @@ avante.setup({
   },
 })
 
--- 验证配置是否生效
-local final_config = require("avante.config")
-if final_config.behaviour.enable_token_counting then
-  print("⚠️ 警告: enable_token_counting 仍然为 true，尝试强制覆盖...")
-  final_config.behaviour.enable_token_counting = false
-end
+-- 确保配置被深度写入，防止插件内部逻辑跳过 setup
+require("avante.config").behaviour.enable_token_counting = false
 
 -- Vibe Coding 提升：一键打开AI侧边栏，让对话成为编码流程的自然部分，而非打断
 -- 设置全局AI命令
