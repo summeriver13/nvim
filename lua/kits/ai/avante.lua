@@ -39,7 +39,14 @@ avante.setup({
     enable_token_counting = false, -- 强制禁用本地 Token 计算以修复 Windows 下的编码器崩溃问题
     auto_focus_sidebar = true,
   },
-  
+
+  -- Vibe Coding 提升：深度汉化 AI 交互指令
+  -- 强制要求 AI 使用中文回复，并优化中文语境下的代码解释
+  system_prompt = [[你是一个经验丰富的软件工程师，擅长 Vibe Coding。
+请始终使用中文回复用户。
+在解释代码时，请保持简洁专业。
+如果涉及到代码修改，请确保符合当前项目的风格。]],
+
   -- 快捷键映射 (类 Cursor)
   mappings = {
     diff = {
@@ -73,8 +80,12 @@ avante.setup({
     },
   },
 
+  -- 汉化 UI 提示文字
+  hints = {
+    enabled = true,
+  },
+  
   -- UI 渲染配置
-  hints = { enabled = true },
   windows = {
     position = "right",
     wrap = true,
@@ -85,7 +96,7 @@ avante.setup({
       rounded = true,
     },
     input = {
-      prefix = "> ",
+      prefix = "💬 ", -- 更改为更亲切的对话图标
       height = 8,
     },
     edit = {
@@ -128,7 +139,7 @@ avante.setup({
 -- 确保配置被深度写入，防止插件内部逻辑跳过 setup
 require("avante.config").behaviour.enable_token_counting = false
 
--- Vibe Coding 提升：一键打开AI侧边栏，让对话成为编码流程的自然部分，而非打断
+  -- Vibe Coding 提升：一键打开AI侧边栏，让对话成为编码流程的自然部分，而非打断
 -- 设置全局AI命令
 vim.api.nvim_create_user_command("AIChat", function()
   require("avante.api").ask()
@@ -140,7 +151,7 @@ vim.api.nvim_create_user_command("AICode", function(opts)
   local lines = vim.api.nvim_buf_get_lines(0, range[1] - 1, range[2], false)
   local code = table.concat(lines, "\n")
   
-  avante.send_to_sidebar({
+  require("avante.api").send_to_sidebar({
     mode = "completion",
     context = code,
     instruction = "请优化或重写这段代码:",
@@ -186,11 +197,11 @@ vim.api.nvim_create_user_command("AIDebug", function(opts)
   end
   local text = table.concat(lines, "\n")
   
-  avante.send_to_sidebar({
+  require("avante.api").send_to_sidebar({
     mode = "debug",
     context = text,
-    instruction = "请分析以下错误日志并提供解决方案:",
+    instruction = "这段代码似乎有报错，请帮我分析原因并提供修复方案:",
   })
-end, { range = true, desc = "发送错误日志或当前行给AI调试" })
+end, { range = true, desc = "发送选中内容或当前行给AI调试接口" })
 
 print("✅ Avante AI 配置加载完成 - 沉浸式AI编程体验已启用")
