@@ -16,11 +16,6 @@ return {
     event = "VeryLazy",
     lazy = false,
     version = false, -- 设置为 false 以使用最新开发版
-    opts = {
-      -- 基础配置
-      provider = "openai",
-      auto_suggestions_provider = "openai",
-    },
     build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false", -- Windows 下的构建命令
     dependencies = {
       "stevearc/dressing.nvim",
