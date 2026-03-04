@@ -48,7 +48,7 @@ return {
   -- Vibe Coding 提升：Snacks提供类Cursor的平滑浮窗，让AI交互视觉统一化
   -- Snacks.nvim - 极简浮窗UI
   {
-    "tamton-aquib/snacks.nvim",
+    "folke/snacks.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("kits.ai.snacks")
