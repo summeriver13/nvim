@@ -49,6 +49,11 @@ end, { desc = "普通模式粘贴" })
 -- 取消高亮
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 
+-- Vibe Coding 提升：四象限布局一键归位
+keymap.set("n", "<leader>L", function()
+  require("kits.ui.layout").restore()
+end, { desc = "一键归位四象限布局" })
+
 -- ## 鼠标交互优化 - Vibe Coding 提升点
 -- 1. 点击代码区域时自动取消搜索高亮（类似 GUI 行为，点击背景/新位置取消选择）
 keymap.set("n", "<LeftMouse>", "<LeftMouse>:nohl<CR>", { silent = true })

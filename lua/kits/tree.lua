@@ -62,6 +62,7 @@ if status_nt then
     },
     view = {
       width = 30,
+      side = "left", -- 强制固定在最左侧
     },
     renderer = {
       group_empty = true,
