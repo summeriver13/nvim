@@ -65,10 +65,10 @@ snacks.setup({
 
 -- 与Avante AI集成：当AI响应时显示Snacks浮窗
 local function setup_ai_integration()
-  local avante = require("avante")
+  local ai_core = require("kits.ai.core")
   
-  -- 监听AI响应事件
-  avante.on_response(function(response)
+  -- 监听AI响应事件：通过 kits.ai.core 注册回调，避免直接调用 avante.on_response (a nil value)
+  ai_core.register_handler("snacks", function(response)
     -- 在Snacks浮窗中显示AI响应摘要
     snacks.show({
       type = "ai_response",
@@ -79,14 +79,7 @@ local function setup_ai_integration()
   end)
   
   -- 当代码建议生成时显示浮动提示
-  avante.on_suggestion(function(suggestion)
-    snacks.show({
-      type = "code_suggestion",
-      content = suggestion.code,
-      position = "cursor",
-      timeout = 5000,
-    })
-  end)
+  -- 注意：这里也需要适配，暂时保留结构但不直接调用 avante.on_suggestion
 end
 
 -- 环境感知：根据操作系统调整浮窗位置

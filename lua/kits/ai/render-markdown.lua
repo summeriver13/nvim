@@ -46,10 +46,10 @@ vim.g.mkdp_citation_style = 'apa'
 -- Vibe Coding 提升：AI响应自动渲染为精美文档，实现从对话到文档的无缝转换
 -- 与Avante AI集成：自动预览AI返回的Markdown响应
 local function setup_ai_integration()
-  local avante = require("avante")
+  local ai_core = require("kits.ai.core")
   
-  -- 当AI返回Markdown格式响应时，自动打开预览
-  avante.on_response(function(response)
+  -- 当AI返回Markdown格式响应时，自动打开预览：通过 kits.ai.core 注册回调，避免直接调用 avante.on_response (a nil value)
+  ai_core.register_handler("render-markdown", function(response)
     if response.format == "markdown" or response.content:match("# ") then
       -- 将AI响应写入临时文件并预览
       local temp_file = os.tmpname() .. ".md"

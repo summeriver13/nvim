@@ -220,7 +220,11 @@ end
 -- Vibe Coding 提升：自动配置项目专用格式化工具，让AI生成的代码风格统一，符合团队规范
 -- 设置格式化工具
 function M.setup_formatters(project_type)
-  local null_ls = require("null-ls")
+  local status_null, null_ls = pcall(require, "null-ls")
+  if not status_null then
+    -- 简体中文注释：null-ls 尚未加载或未安装，这在初次启动或 lazy 同步时是正常的
+    return
+  end
   
   local sources = {}
   

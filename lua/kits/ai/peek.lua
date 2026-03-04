@@ -45,10 +45,10 @@ peek.setup({
 
 -- 与Avante AI集成：AI生成的Markdown自动预览
 local function setup_ai_integration()
-  local avante = require("avante")
+  local ai_core = require("kits.ai.core")
   
-  -- 监听AI Markdown响应
-  avante.on_response(function(response)
+  -- 监听AI Markdown响应：通过 kits.ai.core 注册回调，避免直接调用 avante.on_response (a nil value)
+  ai_core.register_handler("peek", function(response)
     if response.format == "markdown" then
       -- 在Peek预览窗口中显示
       peek.open(response.content)
