@@ -8,6 +8,7 @@ Vibe Coding 提升点：
 ]]
 
 local avante = require("avante")
+local env = require("kits.utils.env")
 
 -- Vibe Coding 提升：配置类Cursor的沉浸式侧边栏，让AI对话成为编码流程的自然延伸
 -- 配置Avante.nvim作为AI交互核心
@@ -38,6 +39,8 @@ avante.setup({
     support_paste_from_clipboard = true,
     enable_token_counting = false, -- 强制禁用本地 Token 计算以修复 Windows 下的编码器崩溃问题
     auto_focus_sidebar = true,
+    -- 禁用基于 shell 的上下文提取以防止 Windows 乱码导致的 API 崩溃
+    support_bash_commands = not env.is_windows(),
   },
 
   -- Vibe Coding 提升：深度汉化 AI 交互指令
@@ -45,7 +48,8 @@ avante.setup({
   system_prompt = [[你是一个经验丰富的软件工程师，擅长 Vibe Coding。
 请始终使用中文回复用户。
 在解释代码时，请保持简洁专业。
-如果涉及到代码修改，请确保符合当前项目的风格。]],
+如果涉及到代码修改，请确保符合当前项目的风格。
+]] .. (env.is_windows() and "\n由于当前在 Windows 环境下，请优先使用 powershell 或 cmd 命令（如 dir 替代 ls），并确保输出路径使用反斜杠 \\。" or ""),
 
   -- 快捷键映射 (类 Cursor)
   mappings = {
