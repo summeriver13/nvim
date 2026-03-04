@@ -21,4 +21,5 @@ require("kits.comment") -- comment 注释
 require("kits.autopair") -- autopair 括号匹配
 
 require("kits.file-search") -- file search 文件搜索
+require("kits.terminal") -- terminal 底部终端
 

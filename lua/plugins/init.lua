@@ -8,4 +8,11 @@ return {
   "folke/neodev.nvim",
   "folke/which-key.nvim",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("kits.terminal")
+    end,
+  },
 }
