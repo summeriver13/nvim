@@ -13,15 +13,17 @@ local avante = require("avante")
 -- 配置Avante.nvim作为AI交互核心
 avante.setup({
   --- @alias Provider "openai" | "claude" | "azure" | "gemini" | "cohere" | "replicate" | "together" | "mistral" | "ollama"
-  provider = "openai",
+  provider = "openai", -- 使用 OpenAI 兼容模式接入 DeepSeek
   auto_suggestions_provider = "openai",
   
   providers = {
     openai = {
-      endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o",
+      endpoint = "https://api.deepseek.com/v1", -- DeepSeek API 终端
+      model = "deepseek-chat", -- DeepSeek 聊天模型
+      api_key_name = "DEEPSEEK_API_KEY", -- 环境变量名
       timeout = 30000,
       max_tokens = 4096,
+      temperature = 0,
     },
   },
 
