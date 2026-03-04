@@ -194,8 +194,8 @@ function M.setup_lsp(project_type)
       },
     })
     
-    -- Ruff LSP配置
-    lsp_config.ruff_lsp.setup({
+    -- Ruff 配置 (替代已弃用的 ruff_lsp)
+    lsp_config.ruff.setup({
       init_options = {
         settings = {
           args = { "--select=E9,F63,F7,F82", "--extend-select=UP" },
@@ -205,7 +205,7 @@ function M.setup_lsp(project_type)
   
   -- JavaScript/TypeScript项目
   elseif project_type == "javascript" then
-    lsp_config.tsserver.setup({
+    lsp_config.ts_ls.setup({
       settings = {
         typescript = {
           suggest = {

@@ -35,7 +35,7 @@ require("mason-lspconfig").setup {
   ensure_installed = {
     "lua_ls",        -- Lua语言服务器
     "pyright",       -- Python类型检查与智能补全
-    "ruff_lsp",      -- Python代码风格与格式化 (替代autopep8/flake8)
+    "ruff",          -- Python代码风格与格式化 (替代ruff_lsp)
     "texlab",        -- LaTeX写作支持 (学术论文必备)
     "marksman",      -- Markdown语言服务器 (增强AI文档渲染)
   },
@@ -83,9 +83,9 @@ lspconfig.pyright.setup {
   end,
 }
 
--- Vibe Coding 提升：ruff_lsp自动格式化AI生成的代码，确保符合PEP8标准
+-- Vibe Coding 提升：ruff自动格式化AI生成的代码，确保符合PEP8标准
 -- Ruff语言服务器 (Python代码风格与格式化)
-lspconfig.ruff_lsp.setup {
+lspconfig.ruff.setup {
   capabilities = capabilities,
   init_options = {
     settings = {
@@ -94,6 +94,9 @@ lspconfig.ruff_lsp.setup {
   },
   -- 与AI集成：当AI生成代码后自动格式化
   on_attach = function(client, bufnr)
+    -- 禁用 ruff 的 hover 提示，因为它可能与 pyright 冲突
+    client.server_capabilities.hoverProvider = false
+    
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       callback = function()
