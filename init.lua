@@ -15,6 +15,7 @@ require("kits.buffer") -- buffer 标签栏
 require("kits.tree") -- tree 文件树
 
 require("kits.lsp") -- lsp 语言服务协议
+require("kits.ai") -- ai AI编程体验增强
 require("kits.cmp") -- cmp 代码补全
 require("kits.comment") -- comment 注释
 require("kits.autopair") -- autopair 括号匹配
