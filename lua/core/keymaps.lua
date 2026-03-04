@@ -32,6 +32,14 @@ keymap.set("n", "<leader>sh", "<C-w>h") -- 垂直新增窗口
 -- 取消高亮
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 
+-- ## 鼠标交互优化 - Vibe Coding 提升点
+-- 1. 点击代码区域时自动取消搜索高亮（类似 GUI 行为，点击背景/新位置取消选择）
+keymap.set("n", "<LeftMouse>", "<LeftMouse>:nohl<CR>", { silent = true })
+
+-- 2. 插入模式下点击鼠标，自动切换回 Normal 模式进行定位，确保编辑区以 Vim 模式为主
+-- 这实现了用户要求的“点击代码区域时使用 Vim 模式为主”的体验
+keymap.set("i", "<LeftMouse>", "<Esc><LeftMouse>", { silent = true })
+
 -- ## Plugin 插件
 -- nvim-tree
 keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>")

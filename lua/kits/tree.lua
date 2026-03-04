@@ -18,6 +18,34 @@ vim.opt.termguicolors = true
 local status_nt, nvim_tree = pcall(require, "nvim-tree")
 if status_nt then
   nvim_tree.setup({
+    -- 开启鼠标单点击打开文件，提升 GUI 交互感
+    open_on_tab = false,
+    hijack_cursor = true,
+    update_focused_file = {
+      enable = true,
+      update_root = false,
+    },
+    actions = {
+      open_file = {
+        quit_on_open = false,
+        window_picker = {
+          enable = true,
+        },
+      },
+    },
+    on_attach = function(bufnr)
+      local api = require('nvim-tree.api')
+      local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+      end
+
+      -- 默认按键映射
+      api.config.mappings.default_on_attach(bufnr)
+
+      -- Vibe Coding 提升：配置鼠标单击打开文件
+      -- 鼠标左键单击：打开文件或展开目录
+      vim.keymap.set('n', '<LeftRelease>', api.node.open.edit, opts('Open'))
+    end,
     sort = {
       sorter = "case_sensitive",
     },
