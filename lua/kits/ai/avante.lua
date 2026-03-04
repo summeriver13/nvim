@@ -13,31 +13,21 @@ local avante = require("avante")
 -- 配置Avante.nvim作为AI交互核心
 avante.setup({
   --- @alias Provider "openai" | "claude" | "azure" | "gemini" | "cohere" | "replicate" | "together" | "mistral" | "ollama"
-  provider = "openai", -- 你可以根据需要修改为 gemini, claude 等
+  provider = "openai",
   auto_suggestions_provider = "openai",
   
   providers = {
     openai = {
       endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o", -- 推荐使用最新模型
-      timeout = 30000, -- 超时时间
+      model = "gpt-4o",
+      timeout = 30000,
       max_tokens = 4096,
     },
   },
 
-  -- 侧边栏配置：类似Cursor的聊天界面
-  sidebar_header = {
-    enabled = true,
-    align = "center",
-    rounded = true,
-  },
-  
-  -- 侧边栏宽度
-  width = 40,
-  
   -- 交互行为
   behaviour = {
-    auto_suggestions = false, -- 如果需要自动建议可以开启
+    auto_suggestions = false,
     auto_set_highlight_group = true,
     auto_set_keymaps = true,
     auto_apply_diff_after_generation = false,
@@ -46,7 +36,6 @@ avante.setup({
   
   -- 快捷键映射 (类 Cursor)
   mappings = {
-    --- @class AvanteConflictMappings
     diff = {
       ours = "co",
       theirs = "ct",
@@ -81,8 +70,7 @@ avante.setup({
   -- UI 渲染配置
   hints = { enabled = true },
   windows = {
-    --- @type "right" | "left" | "top" | "bottom"
-    position = "right", -- 像 Trae/Cursor 一样放在右侧
+    position = "right",
     wrap = true,
     width = 30,
     sidebar_header = {
@@ -92,25 +80,33 @@ avante.setup({
     },
     input = {
       prefix = "> ",
-      height = 8, -- 输入框高度
+      height = 8,
     },
     edit = {
       border = "rounded",
-      start_insert = true, -- 打开时自动进入插入模式
+      start_insert = true,
     },
     ask = {
-      floating = false, -- 使用侧边栏而不是浮窗
+      floating = false,
       start_insert = true,
       border = "rounded",
       focus_on_apply = "ours",
     },
+  },
+  
+  -- 强制使用 snacks 或 native 以避免 dressing.nvim 的列表错误
+  selector = {
+    provider = "snacks",
+  },
+  input = {
+    provider = "snacks",
   },
 })
 
 -- Vibe Coding 提升：一键打开AI侧边栏，让对话成为编码流程的自然部分，而非打断
 -- 设置全局AI命令
 vim.api.nvim_create_user_command("AIChat", function()
-  avante.toggle_sidebar()
+  require("avante.api").ask()
 end, { desc = "打开/关闭AI聊天侧边栏" })
 
 -- Vibe Coding 提升：选中代码一键分析，消除切换应用和复制粘贴的上下文中断

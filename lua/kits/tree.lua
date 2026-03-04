@@ -94,7 +94,18 @@ if status_nt then
       local is_file = vim.fn.filereadable(data.file) == 1
 
       if no_name or is_file then
+        -- 打开文件树但不聚焦
         require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
+        
+        -- Vibe Coding 提升：启动时尝试自动打开 AI 侧边栏
+        -- 使用 defer_fn 确保在所有 UI 渲染完成后再尝试初始化 AI
+        vim.defer_fn(function()
+          local ok, avante_api = pcall(require, "avante.api")
+          if ok then
+            -- 仅打开侧边栏，不发起询问
+            pcall(avante_api.ask, { ask = false })
+          end
+        end, 500)
       end
     end
   })
