@@ -7,7 +7,10 @@
 
 require('lualine').setup {
   options = {
-    theme  = 'tokyonight'
+    theme  = 'tokyonight',
+    icons_enabled = true,
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
   }
 }
 
@@ -15,10 +18,11 @@ require('lualine').setup {
 
 require('gitsigns').setup {
   signs = {
-    add = { text = '+' },
-    change = { text = '~' },
-    delete = { text = '_' },
-    topdelete = { text = '‾' },
+    add          = { text = '┃' },
+    change       = { text = '┃' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
     changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
 }

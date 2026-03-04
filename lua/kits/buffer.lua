@@ -12,6 +12,10 @@ require("bufferline").setup {
     options = {
         -- 使用 nvim 内置lsp
         diagnostics = "nvim_lsp",
+        show_buffer_icons = true,
+        show_buffer_close_icons = true,
+        show_close_icon = true,
+        show_tab_indicators = true,
         -- 左侧让出 nvim-tree 的位置
         offsets = {{
             filetype = "NvimTree",
